@@ -1,5 +1,8 @@
 import ReactDOM from 'react-dom';
-import App from "./App";
+import React from "react";
+import App from "./components/App";
 
-let corpoApp = document.querySelector(".root");
-ReactDOM.render(App(), corpoApp);
+ReactDOM.render(<App />, document.querySelector(".root"));
+
+//ReactDOM.render(App(), document.querySelector(".root"));
+

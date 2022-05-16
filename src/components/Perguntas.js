@@ -1,13 +1,6 @@
-function Perguntas(props) {
-    return (
-        <div className="pergunta">
-            <h2>Pergunta</h2>
-            <ion-icon name="play-outline"></ion-icon>
-        </div>
-    );
-}
+import React from "react";
 
-function PerguntaClicada(props) {
+function Pergunta(props) {
     return (
         <div className="pergunta-clicada">
             <p>{props.pergunta}</p>
@@ -16,22 +9,7 @@ function PerguntaClicada(props) {
     );
 }
 
-function Resposta(props) {
-    return (
-        <div className="resposta">
-            <p>{props.resposta}</p>
-            <div className="botoes">
-                <button className="vermelho">Não lembrei</button>
-                <button className="amarelo">Quase não lembrei</button>
-                <button className="verde">Zap!</button>
-            </div>
-        </div>
-    )
-}
-
-
-export default function TelaPerguntas() {
-
+export default function Perguntas() {
     const perguntas = [
         {
             pergunta: "O que é JSX?",
@@ -68,29 +46,8 @@ export default function TelaPerguntas() {
     ];
 
     return (
-        <div className="tela-2 ">
-            <header className="topo">
-                <img src="assets/logo-pequeno.png" alt="" />
-                <h1>ZapRecall</h1>
-            </header>
-
-            <section className="conteudo">
-
-                {perguntas.map(() => (<Perguntas />))}
-
-                {perguntas.map((obj) => (<PerguntaClicada pergunta={obj.pergunta} />))}
-
-                {perguntas.map((obj) => (<Resposta resposta={obj.resposta} />))}
-
-
-
-            </section>
-
-            <footer className="bottom">0/4 CONCLUÍDOS</footer>
-        </div>
-    );
-}
-
-function embaralhar() {
-    return Math.random() - 0.5;
+        <>
+            {perguntas.map((obj, index) => (<Pergunta pergunta={obj.pergunta} key={index} />))}
+        </>
+    )
 }
