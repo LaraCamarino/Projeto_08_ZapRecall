@@ -9,8 +9,7 @@ body {
 }
 
 .tela-inicio {
-    height: 100vw;
-    margin-top: 50%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,18 +146,34 @@ body {
     align-items: center;
 }
 
-.vermelho {
+.botoes .erro {
     background-color: #FF3030;
 }
 
-.amarelo {
+.botoes .duvida {
     background-color: #FF922E;
     margin-left: 7px;
     margin-right: 7px;
 }
 
-.verde {
+.botoes .acerto {
     background-color: #2FBE34;
+}
+
+.respondida h2{
+    text-decoration: line-through;
+}
+
+.respondida .erro {
+    color: #FF3030
+}
+
+.respondida .duvida {
+    color: #FF922E
+}
+
+.respondida .acerto {
+    color: #2FBE34
 }
 
 .bottom {
@@ -173,7 +188,4 @@ body {
     align-items: center;
 }
 
-.escondido {
-    display: none;
-}
 
