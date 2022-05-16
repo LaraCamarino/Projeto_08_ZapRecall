@@ -1,6 +1,8 @@
 import React from 'react';
-//import Footer from './Footer';
-
+import LogoPequeno from "../assets/logo-pequeno.png"
+import Setinha from "../assets/setinha.png"
+import Festa from "../assets/party.png"
+import Triste from "../assets/sad.png"
 
 export default function TelaFlashcards() {
     const deckPerguntas = [
@@ -37,9 +39,17 @@ export default function TelaFlashcards() {
             resposta: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
         },
     ];
-    const perguntasRespondidas = [];
-      
-        
+    
+    function Icone (props) {
+        const icones = {
+          acerto: <ion-icon name="checkmark-circle-outline"></ion-icon>,
+          erro: <ion-icon name="close-circle-outline"></ion-icon>,
+          duvida: <ion-icon name="help-circle-outline"></ion-icon>,
+        };
+        const {icone} = props;
+        return <>{icones[icone]}</>
+    }
+    
     function Flashcard(props) {
         const [status, setStatus] = React.useState({ tela: "fechado", resultado: "" });
         const { tela, resultado } = status;
@@ -56,7 +66,7 @@ export default function TelaFlashcards() {
             return (
                 <div className="pergunta-clicada">
                     <p>{props.pergunta}</p>
-                    <img src="assets/setinha.png" alt="" onClick={() => { setStatus({ ...status, tela: "abrirResposta" }) }} />
+                    <img src={Setinha} alt="" onClick={() => { setStatus({ ...status, tela: "abrirResposta" }) }} />
                 </div>
             )
         }
@@ -67,7 +77,7 @@ export default function TelaFlashcards() {
                     <div className="botoes">
                         <button className="erro" onClick={() => { setStatus({ tela: "perguntaRespondida", resultado: "erro" }) }}>Não lembrei</button>
                         <button className="duvida" onClick={() => { setStatus({ tela: "perguntaRespondida", resultado: "duvida" }) }}>Quase não lembrei</button>
-                        <button className="acerto" onClick={() => { setStatus({ tela: "perguntaRespondida", resultado: "acerto" }) }}>Zap!</button>
+                        <button className="acerto" onClick={() => { setStatus({ tela: "perguntaRespondida", resultado: "acerto" })}}>Zap!</button>
                     </div>
                 </div>
             )
@@ -75,32 +85,75 @@ export default function TelaFlashcards() {
         if (tela === "perguntaRespondida") {
             return (
                 <div className="pergunta respondida">
-                    <h2 className={resultado}>Pergunta {props.numero} </h2>
-                    <img src="" alt=""></img>
+                    <h2 className={resultado}>Pergunta {props.numero}</h2>                    
+                    <Icone icone={resultado} />
                 </div>
             )
         }
     }
 
     function Flashcards() {
+        deckPerguntas.sort(embaralhar);
         return (
             <>
-            {deckPerguntas.map((obj, index) => (<Flashcard key={index} numero={index + 1} pergunta={obj.pergunta} resposta={obj.resposta} />))}
+                {deckPerguntas.map((obj, index) => (<Flashcard key={index} numero={index + 1} pergunta={obj.pergunta} resposta={obj.resposta}/>))}
             </>
 
         )
     }
 
+    const [perguntasRespondidas, setPerguntasRespondidas] = React.useState([]);
+
     function Footer() {
-        return (
-            <footer className="bottom">{perguntasRespondidas.length}/{deckPerguntas.length} CONCLUÍDOS</footer>
-        )   
+                
+        if (perguntasRespondidas.length !== deckPerguntas.length) {
+            return (
+                <footer className="footer">
+                    <h2>{perguntasRespondidas.length}/{deckPerguntas.length} CONCLUÍDOS</h2>
+                    <div>
+                        {perguntasRespondidas.map(resposta => <img src="" alt="" className="acerto" />)}
+                    </div>
+                </footer>
+            )
+        }
+        if (perguntasRespondidas.length === deckPerguntas.length && perguntasRespondidas.length > 0) {
+            if (perguntasRespondidas.includes("erro")) {
+                return (
+                    <footer className="footer-concluido">
+                        <h1>
+                            <img src={Triste} alt="" className="acerto" />
+                            Putz...</h1>
+                        <h2>Ainda faltam alguns...
+                            Mas não desanime!</h2>
+                        <h2>{perguntasRespondidas.length}/{deckPerguntas.length} CONCLUÍDOS</h2>
+                        <div>
+                            {perguntasRespondidas.map(resposta => <img src="" alt="" className="acerto" />)}
+                        </div>
+                    </footer>
+                )
+            } else {
+                return (
+                    <footer className="footer-concluido">
+                        <h1>
+                            <img src={Festa} alt="" className="acerto" />
+                            Parabéns!</h1>
+                        <h2>Você não esqueceu de nenhum flashcard!</h2>
+                        <h2>{perguntasRespondidas.length}/{deckPerguntas.length} CONCLUÍDOS</h2>
+                        <div>
+                            {perguntasRespondidas.map(resposta => <img src="" alt="" className="acerto" />)}
+                        </div>
+                    </footer>
+                )
+            }
+        }
+
+
     }
 
     return (
         <div className="tela-2 ">
             <header className="topo">
-                <img src="assets/logo-pequeno.png" alt="" />
+                <img src={LogoPequeno} alt="" />
                 <h1>ZapRecall</h1>
             </header>
 

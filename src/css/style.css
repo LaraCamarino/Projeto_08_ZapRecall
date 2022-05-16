@@ -93,7 +93,8 @@ body {
     margin-right: 10px;
 }
 
-.pergunta-clicada, .resposta {
+.pergunta-clicada,
+.resposta {
     min-height: 150px;
     width: 300px;
     border-radius: 5px;
@@ -160,32 +161,81 @@ body {
     background-color: #2FBE34;
 }
 
-.respondida h2{
+.respondida h2 {
     text-decoration: line-through;
 }
 
 .respondida .erro {
-    color: #FF3030
+    color: #FF3030;
 }
 
 .respondida .duvida {
-    color: #FF922E
+    color: #FF922E;
 }
 
 .respondida .acerto {
-    color: #2FBE34
+    color: #2FBE34;
 }
 
-.bottom {
-    height: 70px;
+.respondida img {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+}
+
+.footer {
+    min-height: 70px;
     background-color: #FFFFFF;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.footer div,
+.footer-concluido div {
+    margin-top: 5px;
+}
 
+.footer img,
+.footer-concluido img {
+    width: 25px;
+    height: 25px;
+}
+
+.footer-concluido {
+    height: 171px;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-concluido h1 {
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-concluido h1 img {
+    margin-right: 5px;
+}
+
+.footer-concluido > h1,
+.footer-concluido > h2 {
+    width: 222px;
+    text-align: center;
+    margin-top: 15px;
+}
